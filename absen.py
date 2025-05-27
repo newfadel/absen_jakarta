@@ -31,7 +31,7 @@ def connect_zkteco():
         return None
 
 def main():
-    # Check local IP
+    # Check local IPx
     local_ip = get_local_ip()
     if not is_same_subnet(local_ip):
         print(f"Error: Your IP ({local_ip}) is not in the 192.168.1.* subnet. Cannot proceed.")
