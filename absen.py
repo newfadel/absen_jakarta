@@ -16,7 +16,7 @@ def check_device_connection(ip, port=4370, timeout=5):
 
 def connect_zkteco():
     try:
-        conn = ZK('192.168.1.115', port=4370, timeout=15, password=1, force_udp=False, ommit_ping=False)
+        conn = ZK('192.168.1.111', port=4370, timeout=15, password=1, force_udp=False, ommit_ping=False)
         connection = conn.connect()
         if connection:
             print("Successfully connected to ZKTeco device")
