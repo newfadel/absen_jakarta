@@ -30,7 +30,7 @@ def connect_zkteco():
 
 def main():
     # Check connection to ZKTeco device
-    if not check_device_connection('192.168.1.115'):
+    if not check_device_connection('192.168.1.111'):
         print("Error: Cannot proceed due to connection failure.")
         return
 
