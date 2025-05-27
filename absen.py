@@ -1,21 +1,18 @@
 import socket
-import re
 from datetime import datetime
 import time
 from zk import ZK, const
 
-def get_local_ip():
+def check_device_connection(ip, port=4370, timeout=5):
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80))
-        ip = s.getsockname()[0]
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(timeout)
+        s.connect((ip, port))
         s.close()
-        return ip
+        return True
     except Exception as e:
-        return None
-
-def is_same_subnet(ip):
-    return ip and ip.startswith('192.168.1.')
+        print(f"Cannot connect to ZKTeco device at {ip}:{port}. Error: {str(e)}")
+        return False
 
 def connect_zkteco():
     try:
@@ -32,10 +29,9 @@ def connect_zkteco():
         return None
 
 def main():
-    # Check local IP
-    local_ip = get_local_ip()
-    if not is_same_subnet(local_ip):
-        print(f"Error: Your IP ({local_ip}) is not in the 192.168.1.* subnet. Cannot proceed.")
+    # Check connection to ZKTeco device
+    if not check_device_connection('192.168.1.115'):
+        print("Error: Cannot proceed due to connection failure.")
         return
 
     # Get current machine time
